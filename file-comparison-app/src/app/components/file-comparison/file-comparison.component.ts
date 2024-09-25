@@ -7,13 +7,13 @@ import {
 } from '@angular/forms';
 import { FileComparisonService } from '../../services/file-comparison.service';
 import { CommonModule } from '@angular/common';
-
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-file-comparison',
   templateUrl: './file-comparison.component.html',
   styleUrls: ['./file-comparison.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, MatSnackBarModule],
 })
 export class FileComparisonComponent {
   fileForm: FormGroup;
@@ -25,6 +25,7 @@ export class FileComparisonComponent {
   constructor(
     private fb: FormBuilder,
     private comparisonService: FileComparisonService,
+    private snackBar: MatSnackBar,
   ) {
     this.fileForm = this.fb.group({
       file1: [null, [Validators.required, this.fileValidator.bind(this)]],
@@ -38,7 +39,6 @@ export class FileComparisonComponent {
   }
 
   fileValidator(control: any) {
-    debugger;
     const file = control.value;
     if (file) {
       const extension = file.name.split('.').pop().toLowerCase();
@@ -61,13 +61,21 @@ export class FileComparisonComponent {
 
     this.comparisonService.compareFiles(formData).subscribe({
       next: (response) => {
-        console.log(response);
-
         this.comparisonResult = response;
+        this.snackBar.open(
+          response.areSame ? 'Both files are same' : 'Both files are not same',
+          'Close',
+          {
+            duration: 2000, // duration in milliseconds
+          },
+        );
         this.errorMessage = '';
       },
       error: (error) => {
         this.errorMessage = error.message;
+        this.snackBar.open(this.errorMessage, 'Close', {
+          duration: 2000// duration in milliseconds
+        });
         this.comparisonResult = null;
       },
     });
