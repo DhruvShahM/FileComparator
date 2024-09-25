@@ -6,15 +6,20 @@
     "start": "ng serve --port 5000",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "format": "prettier --write \"src/**/*.{ts,html,scss}\"",
+    "format:check": "pnpm format --check",
+    "format:write": "pnpm format --write",
     "test": "ng test"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.3.0",
+    "@angular/cdk": "^17.3.10",
     "@angular/common": "^17.3.0",
     "@angular/compiler": "^17.3.0",
     "@angular/core": "^17.3.0",
     "@angular/forms": "^17.3.0",
+    "@angular/material": "^17.3.10",
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
@@ -33,6 +38,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "^3.3.3",
     "typescript": "~5.4.2"
   }
 }

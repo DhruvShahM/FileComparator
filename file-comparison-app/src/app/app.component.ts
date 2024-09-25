@@ -9,10 +9,15 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,FileComparisonComponent,HttpClientModule,CommonModule],
-  providers:[FileComparisonService],
+  imports: [
+    RouterOutlet,
+    FileComparisonComponent,
+    HttpClientModule,
+    CommonModule,
+  ],
+  providers: [FileComparisonService],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'file-comparison-app';

@@ -4,7 +4,10 @@
     <div class="form-group">
       <label for="file1">Select First File</label>
       <input type="file" id="file1" (change)="onFileChange($event, 'file1')" />
-      <div class="validation-message error" *ngIf="fileForm.controls['file1'].errors?.['required'] && submitted">
+      <div
+        class="validation-message error"
+        *ngIf="fileForm.controls['file1'].errors?.['required'] && submitted"
+      >
         File is required.
       </div>
       <div *ngIf="fileForm.controls['file1'].errors?.['extension']">
@@ -15,7 +18,10 @@
     <div class="form-group">
       <label for="file2">Select Second File</label>
       <input type="file" id="file2" (change)="onFileChange($event, 'file2')" />
-      <div class="validation-message error" *ngIf="fileForm.controls['file2'].errors?.['required'] && submitted">
+      <div
+        class="validation-message error"
+        *ngIf="fileForm.controls['file2'].errors?.['required'] && submitted"
+      >
         File is required.
       </div>
       <div *ngIf="fileForm.controls['file2'].errors?.['extension']">

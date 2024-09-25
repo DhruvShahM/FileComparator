@@ -2,19 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environment/environement';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileComparisonService {
-  private compareEndpoint = '/api/compare'; // Update the API endpoint here
+  private compareEndpoint = '/POST/compare'; // Update the API endpoint here
+  private apiEndpoint = environment.apiURL;
 
   constructor(private http: HttpClient) {}
 
   compareFiles(formData: FormData): Observable<any> {
-    return this.http.post<any>(this.compareEndpoint, formData).pipe(
-      catchError(this.handleError)
-    );
+    const path = `${this.apiEndpoint}${this.compareEndpoint}`;
+    return this.http
+      .post<any>(path, formData)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -11,9 +11,8 @@ describe('FileComparisonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FileComparisonComponent ]
-    })
-    .compileComponents();
+      declarations: [FileComparisonComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
