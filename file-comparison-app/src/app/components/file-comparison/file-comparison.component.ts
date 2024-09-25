@@ -8,16 +8,31 @@ import {
 import { FileComparisonService } from '../../services/file-comparison.service';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-file-comparison',
   templateUrl: './file-comparison.component.html',
   styleUrls: ['./file-comparison.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, MatSnackBarModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    MatSnackBarModule,
+    MatIconModule,
+  ],
 })
 export class FileComparisonComponent {
   fileForm: FormGroup;
-  allowedExtensions = ['txt', 'csv', 'json', 'docx'];
+  allowedExtensions = [
+    'txt',
+    'csv',
+    'json',
+    'docx',
+    'pdf',
+    'jpeg',
+    'jpg',
+    'png',
+  ];
   comparisonResult: any = null;
   errorMessage: string = '';
   submitted: boolean = false;
@@ -55,6 +70,22 @@ export class FileComparisonComponent {
       return;
     }
 
+    const file1 = this.fileForm.get('file1')?.value;
+    const file2 = this.fileForm.get('file2')?.value;
+
+    const file1Extension = file1.name.split('.').pop()?.toLowerCase();
+    const file2Extension = file2.name.split('.').pop()?.toLowerCase();
+
+    if (file1Extension !== file2Extension) {
+      this.snackBar.open('File extensions do not match.', 'close', {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar'], // duration in milliseconds
+      });
+      return; // Return error if extensions don't match
+    }
+
     const formData = new FormData();
     formData.append('files', this.fileForm.get('file1')?.value);
     formData.append('files', this.fileForm.get('file2')?.value);
@@ -66,6 +97,8 @@ export class FileComparisonComponent {
           response.areSame ? 'Both files are same' : 'Both files are not same',
           'Close',
           {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
             duration: 2000, // duration in milliseconds
           },
         );
@@ -74,7 +107,9 @@ export class FileComparisonComponent {
       error: (error) => {
         this.errorMessage = error.message;
         this.snackBar.open(this.errorMessage, 'Close', {
-          duration: 2000// duration in milliseconds
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          duration: 2000, // duration in milliseconds
         });
         this.comparisonResult = null;
       },

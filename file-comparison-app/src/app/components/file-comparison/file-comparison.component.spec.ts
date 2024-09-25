@@ -1,8 +1,8 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
+import { FileComparisonService } from '../../services/file-comparison.service';
 import { FileComparisonComponent } from './file-comparison.component';
 
 describe('FileComparisonComponent', () => {
@@ -11,7 +11,8 @@ describe('FileComparisonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FileComparisonComponent],
+      imports: [FileComparisonComponent, HttpClientModule],
+      providers: [FileComparisonService],
     }).compileComponents();
   }));
 

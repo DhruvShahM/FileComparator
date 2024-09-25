@@ -1,5 +1,9 @@
 <div class="container">
   <h2>File Comparison</h2>
+  <div class="banner">
+    <strong>Supported File Types:</strong> txt, csv, json, docx, pdf, jpeg, jpg,
+    png
+  </div>
   <form [formGroup]="fileForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="file1">Select First File</label>
@@ -10,8 +14,12 @@
       >
         File is required.
       </div>
-      <div *ngIf="fileForm.controls['file1'].errors?.['extension']">
-        Invalid file type. Allowed extensions: .txt, .csv, .json, .docx
+      <div
+        class="validation-message error"
+        *ngIf="fileForm.controls['file1'].errors?.['extension']"
+      >
+        Invalid file type. Allowed extensions: .txt, .csv, .json, .docx, .pdf,
+        .jpeg, .jpg, .png
       </div>
     </div>
 
@@ -24,8 +32,12 @@
       >
         File is required.
       </div>
-      <div *ngIf="fileForm.controls['file2'].errors?.['extension']">
-        Invalid file type. Allowed extensions: .txt, .csv, .json, .docx
+      <div
+        class="validation-message error"
+        *ngIf="fileForm.controls['file2'].errors?.['extension']"
+      >
+        Invalid file type. Allowed extensions: .txt, .csv, .json, .docx, .pdf,
+        .jpeg, .jpg, .png
       </div>
     </div>
 

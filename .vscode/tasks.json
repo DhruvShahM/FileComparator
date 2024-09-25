@@ -39,6 +39,19 @@
                 "isDefault": false
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Test Run",
+            "type": "shell",
+            "command": "npm run test",
+            "options": {
+                "cwd": "${workspaceFolder}/file-comparison-app"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
         }
     
     ]
