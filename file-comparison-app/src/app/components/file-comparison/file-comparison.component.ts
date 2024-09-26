@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -5,10 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { FileComparisonService } from '../../services/file-comparison.service';
-import { CommonModule } from '@angular/common';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { FileComparisonService } from '../../services/file-comparison.service';
 @Component({
   selector: 'app-file-comparison',
   templateUrl: './file-comparison.component.html',
@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     CommonModule,
     MatSnackBarModule,
-    MatIconModule,
+    MatIconModule
   ],
 })
 export class FileComparisonComponent {
@@ -40,7 +40,7 @@ export class FileComparisonComponent {
   constructor(
     private fb: FormBuilder,
     private comparisonService: FileComparisonService,
-    private snackBar: MatSnackBar,
+    public readonly snackBar: MatSnackBar,
   ) {
     this.fileForm = this.fb.group({
       file1: [null, [Validators.required, this.fileValidator.bind(this)]],
@@ -65,7 +65,7 @@ export class FileComparisonComponent {
   }
 
   onSubmit() {
-    this.submitted = true;
+  this.submitted = true;
     if (this.fileForm.invalid) {
       return;
     }
