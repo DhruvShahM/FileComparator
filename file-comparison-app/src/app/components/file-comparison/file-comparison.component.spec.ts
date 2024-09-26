@@ -17,7 +17,13 @@ describe('FileComparisonComponent', () => {
     ]);
 
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, MatSnackBarModule, MatIconModule, CommonModule, BrowserAnimationsModule],
+      imports: [
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        MatIconModule,
+        CommonModule,
+        BrowserAnimationsModule,
+      ],
       // declarations: [FileComparisonComponent],
       providers: [
         FormBuilder,
@@ -65,7 +71,6 @@ describe('FileComparisonComponent', () => {
   });
 
   describe('Negative scenarios', () => {
-
     it('should not submit the form if invalid', () => {
       component.onSubmit();
       expect(fileComparisonService.compareFiles).not.toHaveBeenCalled();
@@ -75,7 +80,7 @@ describe('FileComparisonComponent', () => {
       // Arrange: Set form values with different file extensions
       component.fileForm.patchValue({
         file1: { name: 'file1.pdf' },
-        file2: { name: 'file2.doc' }
+        file2: { name: 'file2.doc' },
       });
 
       // Act: Call the code logic you want to test
@@ -84,14 +89,11 @@ describe('FileComparisonComponent', () => {
       const file1Extension = file1.name.split('.').pop()?.toLowerCase();
       const file2Extension = file2.name.split('.').pop()?.toLowerCase();
 
-
       // Check if value1 === value2 returns false (meaning they are not equal)
-      const comparisonResult = (file1Extension === file2Extension);
+      const comparisonResult = file1Extension === file2Extension;
 
       // Check if the result of the comparison is false
-      expect(comparisonResult).toBeFalse();  // This will pass because 10 !== 20
+      expect(comparisonResult).toBeFalse(); // This will pass because 10 !== 20
     });
-
   });
-
 });

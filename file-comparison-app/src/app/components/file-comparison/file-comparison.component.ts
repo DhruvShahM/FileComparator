@@ -18,7 +18,7 @@ import { FileComparisonService } from '../../services/file-comparison.service';
     ReactiveFormsModule,
     CommonModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
   ],
 })
 export class FileComparisonComponent {
@@ -65,7 +65,7 @@ export class FileComparisonComponent {
   }
 
   onSubmit() {
-  this.submitted = true;
+    this.submitted = true;
     if (this.fileForm.invalid) {
       return;
     }
