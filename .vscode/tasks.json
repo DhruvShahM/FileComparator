@@ -6,7 +6,7 @@
             "type": "shell",
             "command": "npm run start",
             "options": {
-                "cwd": "${workspaceFolder}/file-comparasion-backend"
+                "cwd": "${workspaceFolder}/file-comparision-backend"
             },
             "group": {
                 "kind": "build",
